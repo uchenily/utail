@@ -1,0 +1,94 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+<link rel="stylesheet"
+	href="https://cdn.cdnjs.net/material-design-lite/1.3.0/material.cyan-light_blue.min.css" />
+<script
+	src="https://cdn.cdnjs.net/material-design-lite/1.3.0/material.min.js"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" th:href="@{/admin/css/style.css}" />
+</head>
+
+<body>
+
+	<!-- The drawer is always open in large screens. The header is always 
+         shown, even in small screens. -->
+	<div
+		class="admin-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+		<header th:replace="fragment/common :: header"></header>
+
+		<div th:replace="fragment/common :: drawer"></div>
+
+		<main class="mdl-layout__content mdl-color--grey-100">
+		<div class="mdl-grid admin-content">
+
+			<div class="mdl-grid mdl-cell">
+				<a href="/admin/newpost"
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="font-size:2em;"> + </a>
+			</div>
+
+			<div class="admin-table mdl-grid">
+				<table
+					class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-cell mdl-cell--12-col mdl-shadow--2dp">
+					<thead>
+						<tr>
+							<th class="mdl-data-table__cell--non-numeric">#</th>
+							<th>title</th>
+							<th>author</th>
+							<th>created_time</th>
+							<th>image_path</th>
+							<th>category</th>
+							<th>edit</th>
+							<th>delete</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">1</td>
+							<td><a href="/post/1">TensorFlow核心概念</a></td>
+							<td>admin</td>
+							<td>2018-09-04 21:21:50</td>
+							<td>4.jpg</td>
+							<td>笔记</td>
+							<td><button
+									class="mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">edit</i>
+								</button></td>
+							<td><button
+									class="mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">delete</i>
+								</button></td>
+						</tr>
+
+						<tr th:each="post : ${posts}">
+							<td class="mdl-data-table__cell--non-numeric"
+								th:text="${post.pid}"></td>
+							<td><a th:href="@{'/post/' + ${post.pid}}"
+								th:text="${#strings.abbreviate(post.title,18)}"></a></td>
+							<td th:text="${post.author}"></td>
+							<td th:text="${post.createdTime}"></td>
+							<td th:text="${#strings.abbreviate(post.imagePath,18)}"></td>
+							<td th:text="${post.category.name}"></td>
+							<td><a th:href="@{'/admin/updatepost/' + ${post.pid}}"
+									class="admin-edit mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">edit</i>
+								</a></td>
+							<td><a th:href="@{'/admin/deletepost/' +${post.pid}}"
+								class="admin-delete mdl-button mdl-js-button mdl-button--icon">
+									<i class="material-icons">delete</i>
+							</a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</main>
+	</div>
+
+</body>
+
+</html>

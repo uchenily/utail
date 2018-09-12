@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/headroom.css}"/>
+    <script th:src="@{/js/headroom@0.9.4.js}"></script>
+    <title>index</title>
+</head>
+
+<body class="bg-gray">
+    <header class="header bg-white">
+        <nav class="container">
+            <a href="/" class="logo left"><div th:replace="fragment/logo :: logo"></div></a>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <form class="header-search-form" action="/search" method="GET">
+                <input type="text" value="" autofocus="autofocus" />
+            </form>
+            <span th:if="${session.nickname}">
+            	<a th:href="@{'/logout/' + ${session.nickname}}" th:text="${session.nickname}"></a>
+            </span>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="post-lists clearfix">
+            <div class="post-list-item">
+                <div class="item-thumb" style="background-image:url(image/thumbs/3.jpg);"></div>
+                <a href="/post/1">
+                    <div class="item-desc">
+                        <p>如果你还不够了解 TensorFlow.js，可以右转：here。下面是关于一些关于 TensorFlow.js 核心概念。由于现在 Tenso...</p>
+                    </div>
+                </a>
+                <div class="item-slant reverse-slant bg-deepgrey"></div>
+                <div class="item-slant"></div>
+                <div class="item-label">
+                    <div class="item-title">TensorFlow.js 的核心概念</div>
+                    <a class="item-category" href="/category/note">
+                        <div class="item-category-img bg-ico-web" style="background: url(image/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                        <div class="item-category-name">Notes</div>
+                    </a>
+                </div>
+            </div>
+            <div class="post-list-item">
+                    <div class="item-thumb" style="background-image:url(image/thumbs/4.jpg);"></div>
+                    <a href="#">
+                        <div class="item-desc">
+                            <p>如果你还不够了解 TensorFlow.js，可以右转：here。下面是关于一些关于 TensorFlow.js 核心概念。由于现在 Tenso...</p>
+                        </div>
+                    </a>
+                    <div class="item-slant reverse-slant bg-deepgrey"></div>
+                    <div class="item-slant"></div>
+                    <div class="item-label">
+                        <div class="item-title">TensorFlow.js 的核心概念</div>
+                        <a class="item-category" href="#">
+                            <div class="item-category-img bg-ico-design" style="background: url(image/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-category-name">Notes</div>
+                        </a>
+                </div>
+            </div>
+            <div class="post-list-item">
+                    <div class="item-thumb" style="background-image:url(image/thumbs/3.jpg);"></div>
+                    <a href="#">
+                        <div class="item-desc">
+                            <p>如果你还不够了解 TensorFlow.js，可以右转：here。下面是关于一些关于 TensorFlow.js 核心概念。由于现在 Tenso...</p>
+                        </div>
+                    </a>
+                    <div class="item-slant reverse-slant bg-deepgrey"></div>
+                    <div class="item-slant"></div>
+                    <div class="item-label">
+                        <div class="item-title">TensorFlow.js 的核心概念</div>
+                        <a class="item-category" href="#">
+                            <div class="item-category-img bg-ico-code" style="background: url(image/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-category-name">Notes</div>
+                        </a>
+                </div>
+            </div>
+            
+            <div class="post-list-item" th:each="post : ${posts}">
+                    <div class="item-thumb" th:style="'background-image:url(image/thumbs/' + ${post.imagePath} + ');'"></div>
+                    <a th:href="@{'/post/' + ${post.pid}}">
+                        <div class="item-desc">
+                            <p th:text="${post.description}"></p>
+                        </div>
+                    </a>
+                    <div class="item-slant reverse-slant bg-deepgrey"></div>
+                    <div class="item-slant"></div>
+                    <div class="item-label">
+                        <div class="item-title" th:text="${post.title}"></div>
+                        <a class="item-category" href="#">
+                            <div class="item-category-img bg-ico-web" style="background: url(image/bg-ico.png) no-repeat;background-size: 40px auto;"></div>
+                            <div class="item-category-name" th:text="${post.category.name}"></div>
+                        </a>
+                </div>
+            </div>
+            
+        </div>
+
+		<!-- 分页处理 -->
+        <div class="page-navigator clearfix">
+            <ul>
+                <li th:class="${currentPage+1 eq 1} ? 'current' : ''">
+                    <a href="?page=0">1</a>
+                </li>
+                <li th:if="${totalPages gt 2}" th:class="${currentPage+1 eq 2} ? 'current' : ''">
+                    <a href="?page=1">2</a>
+                </li>
+                <li th:if="${totalPages gt 3}" th:class="${currentPage+1 eq 3} ? 'current' : ''">
+                    <a href="?page=2">3</a>
+                </li>
+                <li th:if="${totalPages gt 4}">
+                    <span>...</span>
+                </li>
+                
+                <li th:if="${currentPage+1 lt totalPages and currentPage gt 4}" class="current">
+                	<a th:href="@{'?page' + ${currentPage}}" th:text="${currentPage+1}"></a>
+                </li>
+                <li th:if="${currentPage+2 lt totalPages and currentPage gt 4}">
+                    <span>...</span>
+                </li>
+                
+                
+                <li th:if="${currentPage gt 5}" th:class="${currentPage+1 eq totalPages} ? 'current' : ''">
+                    <a th:href="@{'?page=' + ${totalPages-1}}" th:text="${totalPages}"></a>
+                </li>
+                <li class="next" th:if="${currentPage+1 lt totalPages}">
+                    <a th:href="@{'?page=' + ${currentPage+1}}">→</a>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="bg-white">
+        <div class="container clearfix">
+            <div class="social-list">
+                <a class="social weibo" target="blank" href="#">WEIBO</a>
+                <a class="social zhihu" target="blank" href="#">ZHIHU</a>
+                <a class="social rss" target="blank" href="#">RSS</a>
+                <a class="social github" target="blank" href="#">GITHUB</a>
+                <a class="social twitter" target="blank" href="#">TWITTER</a>
+            </div>
+            <div class="copyright">
+                <p>Theme is
+                    <a href="https://github.com/chakhsu/pinghsu" target="_blank">Pinghsu</a> by
+                    <a href="https://www.linpx.com/" target="_blank">Chakhsu</a>
+                </p>
+                <p>Powered by
+                    <a href="#" target="_blank" rel="nofollow">utail</a>
+                </p>
+                <p>&copy; 2018</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // grab an element
+        var header = document.querySelector("header");
+        // construct an instance of Headroom, passing the element
+        var headroom = new Headroom(header, {
+            // vertical offset in px before element is first unpinned
+            offset: 70,
+            // scroll tolerance in px before state changes
+            tolerance: 0,
+            classes: {
+                initial: "animated",
+                pinned: "slideDown",
+                unpinned: "slideUp",
+            }
+        });
+        // initialise
+        headroom.init(); 
+    </script>
+
+</body>
+
+</html>

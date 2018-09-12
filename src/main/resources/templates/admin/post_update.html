@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="fragment/common :: head"></head>
+
+<body>
+	<!-- The drawer is always open in large screens. The header is always 
+         shown, even in small screens. -->
+	<div
+		class="admin-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+		<header th:replace="fragment/common :: header"></header>
+		
+		<div th:replace="fragment/common :: drawer"></div>
+	
+		<main class="mdl-layout__content mdl-color--grey-100">
+		<div class="mdl-grid admin-content">
+
+			<form id="post_form" action="/admin/post" method="POST"
+				class="mdl-grid mdl-cell mdl-cell--4-col">
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="post_pid" name="pid"
+						class="mdl-textfield__input mdl-color--white" type="text" th:value="${post.pid}" readonly="readonly"/> <label
+						class="mdl-textfield__label" for="post_pid">#</label>
+				</div>
+				
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="post_title" name="title"
+						class="mdl-textfield__input mdl-color--white" type="text" th:value="${post.title}"/> <label
+						class="mdl-textfield__label" for="post_title">Title</label>
+				</div>
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="post_author" name="author"
+						class="mdl-textfield__input mdl-color--white" type="text" th:value="${post.author}"/> <label
+						class="mdl-textfield__label" for="post_author">Author</label>
+				</div>
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="post_imagePath" name="imagePath"
+						class="mdl-textfield__input mdl-color--white" type="text" th:value="${post.imagePath}"/> <label
+						class="mdl-textfield__label" for="post_imagePath">ImagePath</label>
+				</div>
+				
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<textarea id="post_description" name="description" rows="4"
+						class="mdl-textfield__input mdl-color--white" type="text" th:text="${post.description}"></textarea>
+					<label class="mdl-textfield__label" for="post_description">Description</label>
+				</div>
+
+				<input
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+					type="submit" value="submit"
+					style="background-color: #4CAF50; color: #fff;" /> <a
+					href="/admin/post"><span
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+					style="margin-left: 30px; background-color: #ffb300; color: #fff;">cancel</span></a>
+
+			</form>
+
+			<div class="mdl-grid mdl-cell mdl-cell--4-col">
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="post_tags" name="unused" form="post_form"
+						class="tagify-me mdl-textfield__input" type="text"
+						 th:value="${#strings.setJoin(post.tags,',')}" /> <label class="mdl-textfield__label"
+						for="post_tags">Tags</label>
+				</div>
+			
+				<span class="select_span">Category</span>
+				<select id="select_cagetory" name="categoryId" form="post_form" required="required">
+					<option th:value="${post.category.cid}" selected="selected" th:text="${post.category.name}"></option>
+					<option th:each="category : ${categorys}" th:if="${category.cid} != ${post.category.cid}" th:value="${category.cid}" th:text="${category.name}"></option>
+				</select> 
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<textarea id="post_content" form="post_form" name="content" rows="14"
+						class="mdl-textfield__input mdl-color--white" type="text" th:text="${post_content}"></textarea>
+					<label class="mdl-textfield__label" for="post_content">Content</label>
+				</div>
+			</div>
+		</div>
+		</main>
+
+	</div>
+
+	<script th:src="@{/admin/js/tagify.js}"></script>
+	<script>
+		// 鐢熸垚鏍囩, 浣跨敤鐨勫簱: tagify.js
+		tagifyJS();
+	</script>
+</body>
+
+</html>

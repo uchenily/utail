@@ -1,0 +1,104 @@
+.admin-layout .admin-navigation .mdl-navigation__link {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.56);
+    font-weight: 500;
+}
+
+.admin-layout .admin-navigation .mdl-navigation__link:hover {
+    background-color: #00BCD4;
+    color: #37474F;
+}
+
+.admin-navigation .mdl-navigation__link .material-icons {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.56);
+    margin-right: 32px;
+}
+
+/* admin-card */
+
+.admin-cards {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+}
+
+.admin-cards .admin-separator {
+    height: 32px;
+}
+
+.admin-cards .mdl-card__title {
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.admin-cards ul {
+    padding: 0;
+}
+
+.admin-cards h3 {
+    font-size: 1em;
+}
+
+.admin-updates .mdl-card__title {
+    min-height: 200px;
+    background-image: url('/admin/img/dog.png');
+    background-position: 90% 100%;
+    background-repeat: no-repeat;
+}
+
+.admin-cards .mdl-card__actions a {
+    color: #00BCD4;
+    text-decoration: none;
+}
+
+.admin-table a {
+    text-decoration:none;
+}
+
+.admin-table a:hover {
+    text-decoration:underline;
+}
+
+
+/* tagify.js生辰的输入框 */
+.tagify-me-text {
+	height: 24px;
+	border:none;
+	outline:0;
+	width:100%;
+}
+
+.select_span {
+	display:inline;
+	width:100%;
+}
+
+#select_cagetory {
+    display:inline-block;
+    border: none;
+    width:50%;
+    outline:0;
+    padding-left: 10px;
+    height:30px;
+}
+
+.admin-edit:hover {
+	color:rgb(64, 196, 255);
+}
+
+.admin-delete:hover {
+	color:#ff1744;
+}

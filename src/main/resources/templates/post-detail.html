@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+        <link rel="stylesheet" th:href="@{/css/headroom.css}"/>
+        <link rel="stylesheet" th:href="@{/css/solarized-light.css}"/>
+        <script th:src="@{/js/headroom@0.9.4.js}"></script>
+        <title>detail</title>
+    </head>
+<body>
+
+    <header class="header bg-white">
+        <nav class="container">
+        	<a href="/" class="logo left">
+        		<div th:replace="fragment/logo :: logo"></div>
+        	</a>
+            <a href="/">Home</a>
+            <a href="about">About</a>
+            <!-- <a href="#">Search</a> -->
+            <form class="header-search-form" action="">
+                <input type="text" value="" autofocus="autofocus" />
+            </form>
+        </nav>
+    </header>
+
+    <article class="main-content page-page">
+        <div class="post-header">
+            <h1 class="post-title" th:text="${post.title}"></h1>
+            <div class="post-data"> <time datetime="2018-04-01T23:34:00+08:00" itemprop="datePublished">Published on Apr 1, 2018</time> in <a href="https://www.linpx.com/c/tutorials/">Tutorials</a>
+                with <a href="#comments"> 12 comments</a> </div>
+        </div>
+        <div id="post-content" class="post-content" itemprop="articleBody">
+            <p class="post-tags">
+            	<a th:each="tag : ${post.tags}" th:href="@{'/tag/' + ${#strings.toLowerCase(tag.name)}}" th:text="${tag.name}"></a>
+            </p>
+            <p th:utext="${post_content}"></p>
+            
+            <p class="post-info"> 本文由 <a href="#" th:text="${post.author}"></a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/"
+                    target="_blank" rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可<br />本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名<br /></p>
+        </div>
+    </article>
+
+    <footer class="bg-white">
+        <div class="container clearfix">
+            <div class="social-list">
+                <a class="social weibo" target="blank" href="#">WEIBO</a>
+                <a class="social zhihu" target="blank" href="#">ZHIHU</a>
+                <a class="social rss" target="blank" href="#">RSS</a>
+                <a class="social github" target="blank" href="#">GITHUB</a>
+                <a class="social twitter" target="blank" href="#">TWITTER</a>
+            </div>
+            <div class="copyright">
+                <p>Theme is
+                    <a href="https://github.com/chakhsu/pinghsu" target="_blank">Pinghsu</a> by
+                    <a href="https://www.linpx.com/" target="_blank">Chakhsu</a>
+                </p>
+                <p>Powered by
+                    <a href="#" target="_blank" rel="nofollow">utail</a>
+                </p>
+                <p>&copy; 2018</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="directory-content" class="directory-content">
+        <div id="directory"></div>
+    </div>
+    <script th:src="@{/js/directory-in-right.js}"></script>
+
+    <script th:src="@{/js/header-headroom.js}"></script>
+
+    <!-- highlight -->
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+
+</body>
+</html>

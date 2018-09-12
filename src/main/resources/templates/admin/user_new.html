@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="fragment/common :: head"></head>
+
+<body>
+	<!-- The drawer is always open in large screens. The header is always 
+         shown, even in small screens. -->
+	<div
+		class="admin-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+		<header th:replace="fragment/common :: header"></header>
+
+		<div th:replace="fragment/common :: drawer"></div>
+
+		<main class="mdl-layout__content mdl-color--grey-100">
+		<div class="mdl-grid admin-content">
+
+			<form id="new_user_form" action="/admin/user" method="POST"
+				class="mdl-grid mdl-cell mdl-cell--4-col">
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="user_username" name="username"
+						class="mdl-textfield__input mdl-color--white" type="text" /> <label
+						class="mdl-textfield__label" for="user_username">Username</label>
+				</div>
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="user_password" name="password"
+						class="mdl-textfield__input mdl-color--white" type="text" />
+					<label class="mdl-textfield__label" for="user_password">Password</label>
+				</div>
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="user_nickname" name="nickname"
+						class="mdl-textfield__input mdl-color--white" type="text" />
+					<label class="mdl-textfield__label" for="user_nickname">Nickname</label>
+				</div>
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input id="user_email" name="email"
+						class="mdl-textfield__input mdl-color--white" type="email" />
+					<label class="mdl-textfield__label" for="user_email">Email</label>
+				</div>
+
+				<input
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+					type="submit" value="submit"
+					style="background-color: #4CAF50; color: #fff;" /> <a
+					href="/admin/user"><span
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+					style="margin-left: 30px; background-color: #ffb300; color: #fff;">cancel</span></a>
+
+			</form>
+
+		</div>
+		</main>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>login-bootstrap</title>
+
+<!-- Bootstrap core CSS -->
+<link
+	href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<!-- <link href="signin.css" rel="stylesheet"> -->
+
+<style>
+	.form-signin {
+		width: 300px;
+		margin: 0 auto;
+		margin-top: 8%;
+	}
+</style>
+</head>
+
+<body class="text-center">
+	<form class="form-signin" action="/validate" method="POST">
+		<div th:replace="fragment/logo :: logo-big"></div>
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<label for="inputNickname" class="sr-only">nickname</label> 
+		<input type="text" id="inputNickname" name="nickname" class="form-control" placeholder="nickname" required="required" autofocus="autofocus" />
+		<label for="inputPassword" class="sr-only">password</label> 
+		<input type="password" id="inputPassword" name="password" class="form-control" placeholder="password" required="required" />
+		<div class="checkbox mb-3">
+			<label> <input type="checkbox" value="remember-me" />
+				Remember me
+			</label>
+		</div>
+		<div class="info" th:if="${info}">
+			<p th:text="${info}" style="color:#eb5055;"></p>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+			in</button>
+		<p class="mt-5 mb-3 text-muted">© 2018</p>
+	</form>
+</body>
+</html>
